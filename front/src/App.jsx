@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
-import Home from './Pages/Home/Home';
-import Cart from './Pages/Cart/Cart';
-import Contact from './Pages/Contact/Contact';
-import Product from './Components/Product/Product';
+import Home from './pages/Home/Home';
+import Cart from './pages/Cart/Cart';
+import Contact from './pages/Contact/Contact';
+import Product from './pages/Product/Product'; // Corrected the path
 import './App.css';
 
 function App() {
