@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navb {
+    padding: 0.5vw;
+    display: flex;
+    flex-direction: row;
+    background-color: #2d2d2d;
+    align-items: center;
+}
+
+.imgn img {
+    width: 15%; 
+    margin-left: 7vw;
+}
+
+.rows {
+    margin-left: -10vw;
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    align-items: center;
+}
+
+  
+
+.category a {
+    text-decoration: none; 
+    color: white;
+}
+.category h2{
+    font-weight:lighter;
+}
+
+.contactn i, .cartn i {
+    font-size: 1.75vw; 
+}
+.contactn i{
+    font-weight: lighter;
+}
+.category + .category {
+    border-left: 1px solid white; /* Adjust border properties as needed */
+    padding-left: 2vw; /* Adjust padding to control spacing */
+  }
+.search input{
+    padding:1vw;
+    border-radius: 3vw;
+    width:17vw;
+}
+
+
+
