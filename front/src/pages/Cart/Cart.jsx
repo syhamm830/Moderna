@@ -78,10 +78,10 @@ const Cart = () => {
                             </div>
                             <div className="summary-total">
                                 <span>Total Cost</span>
-                                <span>${(totalCost + 5.00).toFixed(2)}</span>
+                                <span>${(totalCost ).toFixed(2)}</span>
                             </div>
                         </div>
-                        <button className="checkout-button">Checkout</button>
+                        <button className="checkout-button" >Checkout</button>
                     </div>
                 </div>
             </section>
