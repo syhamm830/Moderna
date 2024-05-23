@@ -1,0 +1,65 @@
+.mainp{
+    padding-left: 3vw;
+    padding-right: 3vw;
+    position: relative; 
+    overflow: hidden;
+}
+.topm {
+    background-color: black;
+    padding: 0.5vw;
+    overflow: hidden;
+    white-space: nowrap; 
+    box-sizing: border-box; 
+    text-align: center; 
+}
+
+.topm p {
+    color: white;
+    display: inline-block; 
+    animation: swing 5s ease-in-out infinite; 
+    margin: 0; 
+}
+
+@keyframes swing {
+    0%, 100% {
+        transform: translateX(0); 
+    }
+    25% {
+        transform: translateX(-10%); 
+    }
+    75% {
+        transform: translateX(10%); 
+    }
+}
+
+.mainp img{
+    object-fit: cover;
+    width:100%;
+    align-items: center;
+    height: auto;
+    display: block;
+}
+.button-container {
+    position: absolute;
+    top: 53%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    display: flex;
+    gap: 20vw; 
+}
+
+.button-container button {
+    padding: 1vw;
+    background-color: #2d2d2d; 
+    color:white;
+    border: none;
+    cursor: pointer;
+    font-size: 2vw;
+    transition: background-color 0.3s;
+    font-weight: 549;
+}
+
+.button-container button:hover {
+    background-color: white; 
+    color: #2d2d2d;
+}
