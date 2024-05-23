@@ -62,7 +62,7 @@
     font-size: 2vw;
     transition: background-color 0.3s, transform 0.3s;
     font-weight: 549;
-    animation: pulse 2s infinite; /* Add pulse animation */
+    animation: pulse 2s infinite; 
 }
 
 .button-container button:hover {

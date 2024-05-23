@@ -8,25 +8,25 @@ import product44 from './product44.jpg'
 function Men() {
   const products = [
     {
-      id: 1,
+      id: 5,
       imgSrc: product11,
       title: ' Moisture Essence',
       price: 78.9
     },
     {
-      id: 2,
+      id: 6,
       imgSrc: product22,
       title: 'ALL DAY PERFECT',
       price: 50.9
     },
     {
-      id: 3,
+      id: 7,
       imgSrc: product33,
       title: 'Refillable Moisturizer',
       price: 69.9
     },
     {
-      id: 4,
+      id: 8,
       imgSrc: product44,
       title: 'Valentino Fragrance',
       price: 292.9
@@ -43,9 +43,10 @@ function Men() {
         <div className="line"></div>
         </div>
         <div className="product-list">
-        {products.map(product => (
+        {products.map((product) => (
           <Product
             key={product.id}
+            id={product.id}
             imgSrc={product.imgSrc}
             title={product.title}
             price={product.price}
