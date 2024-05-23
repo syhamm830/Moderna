@@ -37,6 +37,11 @@ function Women() {
        <div className="topm">
           <p>New here? Get 20% off everything! with code : ImNew</p>
         </div>
+        <div className="title-container">
+        <div className="line"></div>
+        <h2 className="title">WOMEN SECTION</h2>
+        <div className="line"></div>
+        </div>
         <div className="product-list">
         {products.map(product => (
           <Product

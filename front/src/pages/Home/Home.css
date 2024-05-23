@@ -1,9 +1,10 @@
-.mainp{
+.mainp {
     padding-left: 3vw;
     padding-right: 3vw;
     position: relative; 
     overflow: hidden;
 }
+
 .topm {
     background-color: black;
     padding: 0.5vw;
@@ -16,11 +17,11 @@
 .topm p {
     color: white;
     display: inline-block; 
-    animation: swing 5s ease-in-out infinite; 
+    animation: swing-text 5s ease-in-out infinite; 
     margin: 0; 
 }
 
-@keyframes swing {
+@keyframes swing-text {
     0%, 100% {
         transform: translateX(0); 
     }
@@ -32,13 +33,17 @@
     }
 }
 
-.mainp img{
+.mainp img {
     object-fit: cover;
-    width:100%;
+    width: 100%;
     align-items: center;
     height: auto;
     display: block;
+    animation: swing-image 5s ease-in-out infinite;
 }
+
+
+
 .button-container {
     position: absolute;
     top: 53%; 
@@ -51,15 +56,35 @@
 .button-container button {
     padding: 1vw;
     background-color: #2d2d2d; 
-    color:white;
+    color: white;
     border: none;
     cursor: pointer;
     font-size: 2vw;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     font-weight: 549;
+    animation: pulse 2s infinite; /* Add pulse animation */
 }
 
 .button-container button:hover {
     background-color: white; 
     color: #2d2d2d;
+    animation: bounce 0.5s; /* Add bounce effect on hover */
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Slightly increase size */
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Move up slightly */
+    }
 }
