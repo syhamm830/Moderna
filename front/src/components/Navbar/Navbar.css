@@ -13,11 +13,11 @@
 
 .imgn img {
     width: 15%; 
-    margin-left: 7vw;
+    margin-left: 9vw;
 }
 
 .rows {
-    margin-left: -10vw;
+    margin-left: -30vw;
     display: flex;
     flex-direction: row;
     gap: 2vw;
@@ -32,6 +32,7 @@
 }
 .category h2{
     font-weight:lighter;
+    font-size: 1.5vw;
 }
 
 .contactn i, .cartn i {
@@ -41,13 +42,13 @@
     font-weight: lighter;
 }
 .category + .category {
-    border-left: 1px solid white; /* Adjust border properties as needed */
-    padding-left: 2vw; /* Adjust padding to control spacing */
+    border-left: 1px solid white; 
+    padding-left: 2vw; 
   }
 .search input{
-    padding:1vw;
+    padding:0.8vw;
     border-radius: 3vw;
-    width:17vw;
+    width:30vw;
 }
 
 
