@@ -3,6 +3,8 @@ import './Cart.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faShoppingCart, faHome } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cart = () => {
     const [items, setItems] = useState([
@@ -12,13 +14,26 @@ const Cart = () => {
     ]);
 
     const handleQuantityChange = (id, delta) => {
-        setItems(prevItems => prevItems.map(item =>
-            item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-        ));
+        setItems(prevItems => {
+            const updatedItems = prevItems.map(item =>
+                item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
+            );
+            const item = updatedItems.find(item => item.id === id);
+            if (delta > 0) {
+                toast.success(`Increased quantity of ${item.name}`);
+            } else {
+                toast.info(`Decreased quantity of ${item.name}`);
+            }
+            return updatedItems;
+        });
     };
 
     const handleRemove = id => {
-        setItems(prevItems => prevItems.filter(item => item.id !== id));
+        setItems(prevItems => {
+            const removedItem = prevItems.find(item => item.id === id);
+            toast.error(`Removed ${removedItem.name}`);
+            return prevItems.filter(item => item.id !== id);
+        });
     };
 
     const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
@@ -26,6 +41,7 @@ const Cart = () => {
 
     return (
         <div className="App">
+            <ToastContainer />
             <section>
                 <div className="cart">
                     <div className="cart-details">
@@ -78,10 +94,12 @@ const Cart = () => {
                             </div>
                             <div className="summary-total">
                                 <span>Total Cost</span>
-                                <span>${(totalCost ).toFixed(2)}</span>
+                                <span>${(totalCost).toFixed(2)}</span>
                             </div>
                         </div>
-                        <button className="checkout-button" >Checkout</button>
+                        <button className="checkout-button">
+                            <Link to="/checkout">Checkout</Link>
+                        </button>
                     </div>
                 </div>
             </section>
