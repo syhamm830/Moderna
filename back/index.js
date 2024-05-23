@@ -10,7 +10,7 @@ app.use(cors("*"))
 
 connectDb = async () => {
     try {
-      await mongoose.connect('', {
+      await mongoose.connect('mongodb+srv://islemsyrine:270602@cluster0.rtae7dy.mongodb.net/', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
@@ -20,7 +20,7 @@ connectDb = async () => {
     }
   }
 
-  app.listen(8000, () => {
+  app.listen(8001, () => {
     connectDb()
-    console.log("listening on port 8000 ! ");
+    console.log("listening on port 8001 ! ");
   });

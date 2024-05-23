@@ -4,8 +4,6 @@ const productValidation = require("../validation/products")
 
 
 const createproduct = async (req,res)=>{
-    // verify that data passes through
-    // validation
 
     let {error,value } = productValidation.validate(req.body);
     if (error){
@@ -47,15 +45,11 @@ const getproductById = async (req,res)=>{
 }
 
 const updateproductById = async (req,res)=>{
-    // verification de l'existence de l'element 
     const productId = req.params.id;
-
-    // validate data
     let {error,value } = productValidation.validate(req.body);
     if (error){
         return res.status(400).json({message : error.details[0].message})
     }
-    // find and update
     try  {
         console.log(value);
         const product = await  productschema.findByIdAndUpdate(productId,value,{new:true})
@@ -73,7 +67,6 @@ const deleteproductById = async (req,res)=>{
     }catch(e){
         res.status(404).json({message:"no  product with id "+productId})
     }
-
 }
 
 
