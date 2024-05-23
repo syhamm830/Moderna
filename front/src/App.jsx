@@ -12,6 +12,7 @@ import Men from './pages/Men/Men';
 import SignUp from './components/Form/SignUp';
 import NotFound from "./components/NotFound";
 import './App.css';
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/women" element={<Women />} />
         <Route path="/men" element={<Men />} />
         <Route path="/signup" element={<SignUp />} />  
+        <Route path="/checkout" element={<Checkout />} />  
         <Route path="/not-found" element={<NotFound />} />
         <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>

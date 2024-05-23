@@ -10,7 +10,7 @@ app.use(cors("*"))
 
 connectDb = async () => {
     try {
-      await mongoose.connect('mongodb+srv://islemsyrine:270602@cluster0.rtae7dy.mongodb.net/', {
+      await mongoose.connect('', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
