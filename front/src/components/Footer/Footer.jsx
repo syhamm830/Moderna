@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import 'flag-icons/css/flag-icons.min.css'; // Ensure this is imported
+import 'flag-icons/css/flag-icons.min.css'; 
 
 function Footer() {
   return (

@@ -7,6 +7,7 @@ import Contact from './pages/Contact/Contact';
 import Description from './pages/Description/Description';
 import Women from './pages/Women/Women';
 import Men from './pages/Men/Men';
+import SignUp from './components/Form/SignUp';  // Add the SignUp import
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Description" element={<Description />} />
         <Route path="/Women" element={<Women />} />
         <Route path="/Men" element={<Men />} />
+        <Route path="/signup" element={<SignUp />} />  // Add the SignUp route
       </Routes>
       <Footer />
     </Router>

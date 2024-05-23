@@ -7,7 +7,7 @@ import { faUser, faLock, faHome } from '@fortawesome/free-solid-svg-icons';
 import bg from '../../assets/SignBack.png'; 
 
 export default function Form() {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
 
     return (
@@ -20,17 +20,29 @@ export default function Form() {
                         <form id="form" className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
                             <div className="input-container">
                                 <FontAwesomeIcon icon={faUser} className="icon" />
-                                <input type="text" {...register("usernameOrEmail")} placeholder="Username or Email" />
+                                <input
+                                    type="text"
+                                    {...register("usernameOrEmail", { required: true })}
+                                    placeholder="Username or Email"
+                                    className={errors.usernameOrEmail ? 'error-input' : ''}
+                                />
+                                {errors.usernameOrEmail && <a className="error">Username or Email is required</a>}
                             </div>
                             <div className="input-container">
                                 <FontAwesomeIcon icon={faLock} className="icon" />
-                                <input type="password" {...register("password")} placeholder="Password" />
+                                <input
+                                    type="password"
+                                    {...register("password", { required: true })}
+                                    placeholder="Password"
+                                    className={errors.password ? 'error-input' : ''}
+                                />
+                                {errors.password && <a className="error">Password is required</a>}
                             </div>
                             <button className="btn">Sign In</button>
                         </form>
                         <div className="links">
-                         <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-                         <Link to="/">
+                            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+                            <Link to="/">
                                 <FontAwesomeIcon icon={faHome} className="icon" /> Back to Home
                             </Link>
                         </div>
