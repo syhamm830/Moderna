@@ -1,0 +1,147 @@
+* {
+    font-family: "Playfair Display", cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.register {
+  max-width: 978px;
+  width: 100%;
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 1px 3px 10px #ddd;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+.register span {
+  color: #666;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#form {
+  max-width: 320px;
+  width: 100%;
+  margin: 2em auto;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.input-container .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+.input-container input {
+  border: 1px solid #ddd;
+  padding: 0.9em 1em 0.9em 2.5em;
+  border-radius: 4px;
+  font-size: 1em;
+  width: 100%;
+  transition: border-color 0.3s;
+}
+
+.input-container input:focus {
+  outline: none;
+  border-color: #333;
+}
+
+#form > .btn {
+  background-color: #333;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 0.9em 1em;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+#form > .btn:hover {
+  background-color: #555;
+}
+
+.flex {
+  display: flex;
+  gap: 1em;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.register .col1 {
+  flex: 1;
+  padding: 3em 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.register .col2 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.register .col2 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  align-self: flex-end;
+}
+
+.links {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.links a {
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.links a .icon {
+  margin-right: 5px;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.links p {
+  margin-top: 10px;
+  color: #666;
+}
+
+@media screen and (min-width: 860px) {
+  .register .col2 {
+    display: flex;
+  }
+}
