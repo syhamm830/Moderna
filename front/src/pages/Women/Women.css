@@ -1,0 +1,40 @@
+.topm {
+    background-color: black;
+    padding: 0.5vw;
+    overflow: hidden;
+    white-space: nowrap; 
+    box-sizing: border-box; 
+    text-align: center; 
+}
+
+.topm p {
+    color: white;
+    display: inline-block; 
+    animation: swing 5s ease-in-out infinite; 
+    margin: 0; 
+}
+
+@keyframes swing {
+    0%, 100% {
+        transform: translateX(0); 
+    }
+    25% {
+        transform: translateX(-10%); 
+    }
+    75% {
+        transform: translateX(10%); 
+    }
+}
+
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 3vw; 
+    padding: 2vw; 
+    margin-top: 4vw;
+}
+
+
+  

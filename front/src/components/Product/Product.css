@@ -1,0 +1,27 @@
+.product {
+    text-align: center;
+}
+
+.product-image {
+    width: 19vw;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
+    padding: 1vw;
+    transition: transform 0.3s ease; 
+}
+
+.product-title {
+    margin-top: 10px;
+    font-size: 1.5vw;
+    color: #333;
+}
+
+.product-price {
+    font-size: 1.25vw;
+    color: #555;
+}
+
+.product-image:hover {
+    transform: scale(1.03); 
+}

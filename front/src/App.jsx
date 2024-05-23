@@ -4,7 +4,7 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
 import Contact from './pages/Contact/Contact';
-import Product from './pages/Product/Product';
+import Description from './pages/Description/Description';
 import Women from './pages/Women/Women';
 import Men from './pages/Men/Men';
 import './App.css';
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/Description" element={<Description />} />
         <Route path="/Women" element={<Women />} />
         <Route path="/Men" element={<Men />} />
       </Routes>
