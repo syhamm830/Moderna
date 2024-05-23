@@ -26,7 +26,6 @@
     }
 }
 
-
 .product-list {
     display: flex;
     flex-wrap: wrap; 
@@ -34,26 +33,38 @@
     gap: 3vw; 
     padding: 2vw; 
     margin-top: 4vw;
+    text-decoration: none;
 }
+
 .title-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 2vw 0;
-  }
+}
   
-  .title {
+.title {
     margin: 0 1vw;
     font-size: 2vw;
     font-weight: bold;
     color: #333;
-  }
+}
   
-  .line {
+.line {
     flex-grow: 1;
     height: 2px;
     background-color: #333;
-  }
+}
 
+a {
+    text-decoration: none;
+}
 
+a:hover {
+    text-decoration: none;
+}
   
+.product-title,
+.product-price {
+    text-decoration: none;
+}
