@@ -16,6 +16,7 @@ import Checkout from "./pages/Checkout/Checkout";
 import AdminLayout from './components/Admin/AdminLayout/AdminLayout';
 import Dashboard from './components/Admin/Dashboard/dashboard';
 import Products from './pages/Admin/Products/Products';
+import CreateProduct from './pages/Admin/Products/CreateProduct';
 import EditProduct from './pages/Admin/Products/EditProduct';
 import Users from './pages/Admin/Users/Users';
 import Orders from './pages/Admin/Orders/Orders';

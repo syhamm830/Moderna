@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import categories from 'C:\Users\salou\OneDrive\Documents\GitHub\Moderna\back\validation\categories.js';
 import './CreateProduct.css';
-
+const categories = {
+    Men: ["Skincare", "Haircare", "Fragrance", "Bodycare"],
+    Women: ["Skincare", "Haircare", "Fragrance", "Bodycare"]
+  };
+  
 const CreateProduct = () => {
     const [product, setProduct] = useState({ name: '', price: '', description: '', imageUrl: '', category: '', subcategory: '', stock: '' });
 

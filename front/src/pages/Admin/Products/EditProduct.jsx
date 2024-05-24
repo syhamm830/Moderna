@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './EditProduct.css';
 import { useParams, useNavigate } from 'react-router-dom';
-
+import './EditProduct.css';
+const categories = {
+    Men: ["Skincare", "Haircare", "Fragrance", "Bodycare"],
+    Women: ["Skincare", "Haircare", "Fragrance", "Bodycare"]
+  };
+  
 const EditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    const [product, setProduct] = useState({ name: '', price: '', description: '', imageUrl: '' });
+    const [product, setProduct] = useState({ name: '', price: '', description: '', imageUrl: '', category: '', subcategory: '', stock: '' });
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -47,6 +51,19 @@ const EditProduct = () => {
                 <input type="number" name="price" placeholder="Product Price" value={product.price} onChange={handleChange} required />
                 <textarea name="description" placeholder="Product Description" value={product.description} onChange={handleChange} required />
                 <input type="text" name="imageUrl" placeholder="Product Image URL" value={product.imageUrl} onChange={handleChange} required />
+                <select name="category" value={product.category} onChange={handleChange} required>
+                    <option value="">Select Category</option>
+                    {Object.keys(categories).map((category) => (
+                        <option key={category} value={category}>{category}</option>
+                    ))}
+                </select>
+                <select name="subcategory" value={product.subcategory} onChange={handleChange} required>
+                    <option value="">Select Subcategory</option>
+                    {product.category && categories[product.category].map((subcategory) => (
+                        <option key={subcategory} value={subcategory}>{subcategory}</option>
+                    ))}
+                </select>
+                <input type="number" name="stock" placeholder="Stock" value={product.stock} onChange={handleChange} required />
                 <button type="submit">Update Product</button>
             </form>
         </div>
