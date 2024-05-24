@@ -38,7 +38,7 @@ function Products({ category }) {
             <Product
               key={product._id}
               id={product._id}
-              imgSrc={`http://localhost:8001/images/${product.imageUrl}`}
+              imgSrc={`${product.imageUrl}`}
               title={product.name}
               price={product.price}
               category={product.category}

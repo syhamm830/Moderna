@@ -50,7 +50,7 @@ function Description() {
       </div>
       <div className={`description-container ${categoryClass}`}>
         <div className="description-image-container">
-          <img src={`http://localhost:8001/images/${product.imageUrl}`} alt={product.name} className="description-image" />
+          <img src={`${product.imageUrl}`} alt={product.name} className="description-image" />
         </div>
         <div className="description-details">
           <h1 className="description-title">{product.name}</h1>
