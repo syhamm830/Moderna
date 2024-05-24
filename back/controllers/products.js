@@ -1,80 +1,80 @@
-const productschema = require("../models/products")
-const productValidation = require("../validation/products")  
+const productSchema = require("../models/products");
+const productValidation = require("../validation/products");
 
-
-
-const createproduct = async (req,res)=>{
-
-    let {error,value } = productValidation.validate(req.body);
-    if (error){
-        return res.status(400).json({message : error.details[0].message})
+const createProduct = async (req, res) => {
+    const { error, value } = productValidation.validate(req.body);
+    if (error) {
+        return res.status(400).json({ message: error.details[0].message });
     }
-    try{
-        let newproduct = await productschema.create(req.body)
-        res.status(201).json(newproduct)
-
-    }catch(e){
-        console.log(e)
-        res.status(500).json({message:"error while creating product"})
+    try {
+        const newProduct = await productSchema.create(value);
+        res.status(201).json(newProduct);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: "Error while creating product" });
     }
-    
-}
+};
 
-
-const getAllproducts = async (req,res)=>{
-    try{
-        let products = await productschema.find()
+const getAllProducts = async (req, res) => {
+    try {
+        const products = await productSchema.find();
         res.status(200).json(products);
-    }catch(e){
-        res.status(500).json({message:"error retrieving products"})
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: "Error retrieving products" });
     }
+};
 
-}
-
-
-const getproductById = async (req,res)=>{
-    let productId = req.params.id
-    
-    try  {
-        let product = await productschema.findById(productId)
-        res.json(product)
-    }catch(e){
-        return res.status(400).json({message:"No product with id "+productId})
-    }
-
-}
-
-const updateproductById = async (req,res)=>{
+const getProductById = async (req, res) => {
     const productId = req.params.id;
-    let {error,value } = productValidation.validate(req.body);
-    if (error){
-        return res.status(400).json({message : error.details[0].message})
+    try {
+        const product = await productSchema.findById(productId);
+        if (!product) {
+            return res.status(404).json({ message: `No product found with id ${productId}` });
+        }
+        res.json(product);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: `Error retrieving product with id ${productId}` });
     }
-    try  {
-        console.log(value);
-        const product = await  productschema.findByIdAndUpdate(productId,value,{new:true})
-        res.json(product)
-    }catch(e){
-        return res.status(404).json({message: "product not found wrong id"});
+};
+
+const updateProductById = async (req, res) => {
+    const productId = req.params.id;
+    const { error, value } = productValidation.validate(req.body);
+    if (error) {
+        return res.status(400).json({ message: error.details[0].message });
     }
-}
-
-const deleteproductById = async (req,res)=>{
-    let productId = req.params.id;
-    try{
-        let product = await productschema.findByIdAndDelete(productId)
-        res.json({message:"deleted element with id " + productId})
-    }catch(e){
-        res.status(404).json({message:"no  product with id "+productId})
+    try {
+        const updatedProduct = await productSchema.findByIdAndUpdate(productId, value, { new: true });
+        if (!updatedProduct) {
+            return res.status(404).json({ message: `Product not found with id ${productId}` });
+        }
+        res.json(updatedProduct);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: `Error updating product with id ${productId}` });
     }
-}
+};
 
-
+const deleteProductById = async (req, res) => {
+    const productId = req.params.id;
+    try {
+        const deletedProduct = await productSchema.findByIdAndDelete(productId);
+        if (!deletedProduct) {
+            return res.status(404).json({ message: `No product found with id ${productId}` });
+        }
+        res.json({ message: `Deleted product with id ${productId}` });
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: `Error deleting product with id ${productId}` });
+    }
+};
 
 module.exports = {
-    getAllproducts,
-    getproductById,
-    createproduct,
-    deleteproductById,
-    updateproductById
-}
+    getAllProducts,
+    getProductById,
+    createProduct,
+    updateProductById,
+    deleteProductById
+};

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true,
     minlength: 3,
@@ -22,6 +22,9 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   category: {
+    /*type : mongoose.Schema.Types.ObjectId,
+    ref : 'Category',
+    required : true,*/
     type: String,
     required: true,
     enum: ["Men", "Women"]
