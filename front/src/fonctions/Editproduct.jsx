@@ -45,7 +45,7 @@ export default function Editproduct({setLoading}) {
     },[])
   return (
     <div>
-      {/* <form>
+      <form>
       
         <div>
           <label htmlFor="title">Title:</label>
@@ -87,7 +87,7 @@ export default function Editproduct({setLoading}) {
           />
         </div>
         <button type="submit" onClick={editproduct}>Submit</button>
-      </form> */}
+      </form> 
     </div>
   );
 }

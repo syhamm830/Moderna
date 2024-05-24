@@ -15,16 +15,14 @@ export default async function Deleteproduct(id){
    }
   return (
     <div>
-      {/* <table>
+      <table>
         <thead>
           <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>Content</th>
-            <th>Author</th>
+            <th>description</th>
+            <th>price</th>
             <th>Image</th>
-            <th>Content</th>
-            <th>Created At</th>
             <th>Update</th>
             <th>Delete</th>
           </tr>
@@ -36,10 +34,9 @@ export default async function Deleteproduct(id){
                 <tr key={product.key}>
                   <td>{product._id}</td>
                   <td>{product.title}</td>
-                  <td>{product.content}</td>
-                  <td>{product.author}</td>
+                  <td>{product.description}</td>
+                  <td>{product.price}</td>
                   <td><img width="200px" src={product.image} /></td>
-                  <td>{product.createdAt}</td>
                   <td>
                     <Link to={`products/edit/${product._id}`}><button>Update</button></Link>
                   </td>
@@ -49,6 +46,6 @@ export default async function Deleteproduct(id){
                 </tr>
               ))}
         </tbody>
-      </table> */}
+      </table> 
     </div>
   );

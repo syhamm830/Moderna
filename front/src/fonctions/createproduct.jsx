@@ -34,7 +34,7 @@ export default function Createproduct({setLoading}) {
     }
   return (
     <div>
-      {/* <form>
+      <form>
       
         <div>
           <label htmlFor="title">Title:</label>
@@ -76,7 +76,7 @@ export default function Createproduct({setLoading}) {
           />
         </div>
         <button type="submit" onClick={createproduct}>Submit</button>
-      </form> */}
+      </form> 
     </div>
   );
 }
