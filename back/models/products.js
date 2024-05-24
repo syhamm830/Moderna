@@ -1,12 +1,7 @@
 const mongoose = require("mongoose");
 
-<<<<<<< HEAD
-const productSchema = mongoose.Schema({
-  title: {
-=======
 const productSchema = new mongoose.Schema({
   name: {
->>>>>>> 63cf420a4f99b1457adb8435728e04e921d7a5dc
     type: String,
     required: true,
     minlength: 3,
