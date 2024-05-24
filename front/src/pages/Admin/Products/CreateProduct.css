@@ -1,0 +1,30 @@
+.create-product {
+    padding: 20px;
+    margin-left: 250px;
+    margin-top: 80px;
+}
+
+.create-product form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-product input, .create-product textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.create-product button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+.create-product button:hover {
+    background-color: #555;
+}

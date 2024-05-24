@@ -1,0 +1,36 @@
+.statistics {
+    padding: 20px;
+    margin-left: 250px;
+    margin-top: 80px;
+}
+
+.stat-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.stat-icon {
+    font-size: 2em;
+    margin-right: 10px;
+}
+
+.stat-info h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.stat-info p {
+    margin: 0;
+    font-size: 1.5em;
+}

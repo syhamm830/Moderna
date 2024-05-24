@@ -1,26 +1,45 @@
 const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema({
-  title: {
+  name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 100,
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0,
+  },
+  description: {
+    type: String,
+    required: true,
+    minlength: 10,
+  },
+  imageUrl: {
     type: String,
     required: true,
   },
-  content: {
+  category: {
     type: String,
     required: true,
+    enum: ["Men", "Women"]
   },
-  author: {
+  subcategory: {
     type: String,
     required: true,
+    enum: ["Skincare", "Haircare", "Fragrance", "Bodycare"]
   },
-  image : {
-    type:String,
-    required:true,
+  stock: {
+    type: Number,
+    required: true,
+    min: 0,
   },
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 });
 
-module.exports = mongoose.model("product", productSchema);
+module.exports = mongoose.model("Product", productSchema);
