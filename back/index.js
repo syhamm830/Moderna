@@ -5,13 +5,13 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const productRoutes = require('./routes/products'); 
 const userRoutes = require('./routes/users'); 
+const orderRoutes = require('./routes/orders');  
 
 const app = express();
 
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
-
 
 const connectDb = async () => {
   try {
@@ -23,10 +23,9 @@ const connectDb = async () => {
   }
 };
 
-
 app.use('/products', productRoutes); 
 app.use('/users', userRoutes); 
-
+app.use('/orders', orderRoutes);  
 
 const startServer = async () => {
   await connectDb();
