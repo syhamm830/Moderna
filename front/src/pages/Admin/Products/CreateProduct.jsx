@@ -9,7 +9,7 @@ const categories = {
 };
 
 const CreateProduct = ({ setLoading }) => {
-    const [title, setTitle] = useState('');
+    const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -19,7 +19,7 @@ const CreateProduct = ({ setLoading }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const product = { title, price, description, imageUrl, category, subcategory, stock };
+        const product = { name, price, description, imageUrl, category, subcategory, stock };
         try {
             const response = await fetch('http://localhost:8001/products', {
                 method: 'POST',
@@ -32,8 +32,8 @@ const CreateProduct = ({ setLoading }) => {
             if (response.status !== 201) {
                 toast.error(data.message || 'Error creating product!');
             } else {
-                toast.success(`Created a new product ${title}`);
-                setTitle('');
+                toast.success(`Created a new product ${name}`);
+                setName('');
                 setPrice('');
                 setDescription('');
                 setImageUrl('');
@@ -52,7 +52,7 @@ const CreateProduct = ({ setLoading }) => {
             <ToastContainer />
             <h2>Create Product</h2>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="title" placeholder="Product Name" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                <input type="text" name="name" placeholder="Product Name" value={name} onChange={(e) => setName(e.target.value)} required />
                 <input type="number" name="price" placeholder="Product Price" value={price} onChange={(e) => setPrice(e.target.value)} required />
                 <textarea name="description" placeholder="Product Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
                 <input type="text" name="imageUrl" placeholder="Product Image URL" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} required />

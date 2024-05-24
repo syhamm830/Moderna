@@ -7,6 +7,7 @@ const productRoutes = require('./routes/products');
 const userRoutes = require('./routes/users'); 
 const orderRoutes = require('./routes/orders');  
 
+
 const app = express();
 
 app.use(express.json());
@@ -26,6 +27,8 @@ const connectDb = async () => {
 app.use('/products', productRoutes); 
 app.use('/users', userRoutes); 
 app.use('/orders', orderRoutes);  
+
+
 
 const startServer = async () => {
   await connectDb();
