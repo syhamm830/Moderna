@@ -25,6 +25,30 @@ const getAllproducts = async (req, res) => {
     }
 };
 
+const getproductByCategory = async (req, res) => {
+    try {
+        const products = await productSchema.find({ category: req.params.category });
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found for category ' + req.params.category });
+        }
+        res.status(200).json(products);
+    } catch (e) {
+        res.status(500).json({ message: 'Error retrieving products for category ' + req.params.category });
+    }
+};
+
+const getproductBySubCategory = async (req, res) => {
+    try {
+        const products = await productSchema.find({ subcategory: req.params.subcategory });
+        if (products.length === 0) {
+            return res.status(404).json({ message: 'No products found for subcategory ' + req.params.subcategory });
+        }
+        res.status(200).json(products);
+    } catch (e) {
+        res.status(500).json({ message: 'Error retrieving products for subcategory ' + req.params.subcategory });
+    }
+};
+
 const getproductById = async (req, res) => {
     const productId = req.params.id;
     try {
@@ -62,6 +86,8 @@ const deleteproductById = async (req, res) => {
 module.exports = {
     createProduct,
     getAllproducts,
+    getproductByCategory,
+    getproductBySubCategory,
     getproductById,
     updateproductById,
     deleteproductById

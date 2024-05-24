@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Products.css';
+import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:8001/products')
@@ -22,7 +24,7 @@ const Products = () => {
                 if (data.message) {
                     toast.error(data.message);
                 } else {
-                    setProducts(products.filter(product => product.id !== id));
+                    setProducts(products.filter(product => product._id !== id));
                     toast.success('Product deleted successfully');
                 }
             })
@@ -30,8 +32,7 @@ const Products = () => {
     };
 
     const handleEdit = id => {
-        // Edit functionality can be implemented here
-        toast.info(`Edit functionality for product ID ${id} not implemented yet`);
+        navigate(`/admin/products/edit/${id}`);
     };
 
     return (
@@ -44,20 +45,24 @@ const Products = () => {
                         <th>Image</th>
                         <th>Name</th>
                         <th>Price</th>
+                        <th>Category</th>
+                        <th>Sub-Category</th>
                         <th>Stock Available</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {products.map(product => (
-                        <tr key={product.id}>
+                        <tr key={product._id}>
                             <td><img src={product.imageUrl} alt={product.name} className="product-image" /></td>
                             <td>{product.name}</td>
                             <td>${product.price.toFixed(2)}</td>
+                            <td>{product.category}</td>
+                            <td>{product.subcategory}</td>
                             <td>{product.stock}</td>
                             <td>
-                                <button onClick={() => handleEdit(product.id)}>Edit</button>
-                                <button onClick={() => handleDelete(product.id)}>Delete</button>
+                                <button className='btn' onClick={() => handleEdit(product._id)}>Edit</button>
+                                <button className='btn' onClick={() => handleDelete(product._id)}>Delete</button>
                             </td>
                         </tr>
                     ))}

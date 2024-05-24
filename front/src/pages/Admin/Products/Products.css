@@ -1,20 +1,36 @@
 .products {
     padding: 20px;
-    margin-left: 250px;
-    margin-top: 80px;
 }
 
-table {
+.product-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-th, td {
+.product-table th, .product-table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
 }
 
-th {
+.product-table th {
     background-color: #f2f2f2;
+}
+
+.product-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    padding: 0;
+}
+
+.btn{
+    font-size: large;
+    border: none;
+    background-color: cadetblue;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
 }

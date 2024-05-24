@@ -9,7 +9,10 @@ function Product({ id, imgSrc, title, price }) {
         <img src={imgSrc} alt={title} className="product-image" />
         <h2 className="product-title">{title}</h2>
         <p className="product-price">{price} dt</p>
+        
       </Link>
+      
+      <button className="cartbtn">Add To Cart </button>
     </div>
   );
 }

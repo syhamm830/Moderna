@@ -27,3 +27,15 @@
 .product-image:hover {
     transform: scale(1.03); 
 }
+.cartbtn{
+    border-radius: 5px;
+    background-color: gray;
+    box-shadow: inset;
+    padding: 8%;
+    margin: 10px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width:200px;
+    font-size: large;
+}

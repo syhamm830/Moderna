@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const productRoutes = require('./routes/products'); 
-const userRoutes = require('./routes/users'); 
+// const userRoutes = require('./routes/users'); 
 
 const app = express();
 
@@ -25,7 +25,7 @@ const connectDb = async () => {
 
 
 app.use('/products', productRoutes); 
-app.use('/users', userRoutes); 
+// app.use('/users', userRoutes); 
 
 
 const startServer = async () => {
