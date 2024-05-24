@@ -1,5 +1,9 @@
 const Joi = require('joi');
-const categories = require('./categories');
+
+const categories = {
+    Men: ["Skincare", "Haircare", "Fragrance", "Bodycare"],
+    Women: ["Skincare", "Haircare", "Fragrance", "Bodycare"]
+};
 
 const categoryOptions = Object.keys(categories);
 const subcategoryOptions = [].concat(...Object.values(categories));
