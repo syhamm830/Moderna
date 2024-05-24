@@ -183,8 +183,8 @@ margin-top: 2em;
 }
 
 .checkout-button {
-background-color: rgb(117, 117, 117);
-color: #fff;
+background-color: #2d2d2d;
+color: white !important;
 border: none;
 padding: 1em 2em;
 cursor: pointer;

@@ -98,8 +98,10 @@ const Cart = () => {
                             </div>
                         </div>
                         <button className="checkout-button">
-                            <Link to="/checkout">Checkout</Link>
+                            <Link to="/checkout" style={{ color: "white", textDecoration: "none" }}>
+                                Checkout</Link>
                         </button>
+
                     </div>
                 </div>
             </section>
