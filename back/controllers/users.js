@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const userSchema = require('../models/users');
 const userValidation = require('../validation/users');
 
 const addUser = async (req, res) => {
@@ -7,7 +7,7 @@ const addUser = async (req, res) => {
         return res.status(400).json({ message: error.details[0].message });
     }
     try {
-        const newUser = await User.create(value);
+        const newUser = await userSchema.create(value);
         res.status(201).json(newUser);
     } catch (e) {
         console.error(e);
@@ -17,7 +17,7 @@ const addUser = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await userSchema.find();
         res.status(200).json(users);
     } catch (e) {
         res.status(500).json({ message: 'Error retrieving users' });
@@ -27,7 +27,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
     const userId = req.params.id;
     try {
-        const user = await User.findById(userId);
+        const user = await userSchema.findById(userId);
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.json(user);
     } catch (e) {
@@ -42,7 +42,7 @@ const updateUserById = async (req, res) => {
         return res.status(400).json({ message: error.details[0].message });
     }
     try {
-        const user = await User.findByIdAndUpdate(userId, value, { new: true });
+        const user = await userSchema.findByIdAndUpdate(userId, value, { new: true });
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.json(user);
     } catch (e) {
@@ -53,7 +53,7 @@ const updateUserById = async (req, res) => {
 const deleteUserById = async (req, res) => {
     const userId = req.params.id;
     try {
-        const user = await User.findByIdAndDelete(userId);
+        const user = await userSchema.findByIdAndDelete(userId);
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.json({ message: 'Deleted user with id ' + userId });
     } catch (e) {

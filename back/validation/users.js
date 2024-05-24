@@ -36,26 +36,25 @@ const userValidation = Joi.object({
         }),
 
     phone: Joi.string()
-        .pattern(/^[0-9]{10,15}$/)
+        .pattern(/^[0-9]{8,15}$/)
         .required()
         .messages({
             'string.base': 'Phone number should be a type of text',
             'string.empty': 'Phone number cannot be an empty field',
-            'string.pattern.base': 'Phone number should contain only digits and have a length between 10 and 15',
+            'string.pattern.base': 'Phone number should contain only digits and have a length between 8 and 15',
             'any.required': 'Phone number is a required field'
         }),
+    
 
     birthdate: Joi.date()
-        .less('now')
         .required()
         .messages({
             'date.base': 'Birthdate should be a valid date',
-            'date.less': 'Birthdate should be a date in the past',
             'any.required': 'Birthdate is a required field'
         }),
 
     createdAt: Joi.date()
-        .default(() => new Date(), 'current date')
+        .default(() => new Date())
         .messages({
             'date.base': 'Created At should be a valid date'
         })
