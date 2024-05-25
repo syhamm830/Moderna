@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CartContext from '../../components/cartcontext';
 import './Description.css';
 
 function Description() {
@@ -9,6 +10,7 @@ function Description() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -43,6 +45,11 @@ function Description() {
 
   const categoryClass = product.category.toLowerCase() === 'men' ? 'men' : 'women';
 
+  const handleAddToCart = () => {
+    addToCart({ id: product.id, name: product.name, price: product.price, image: product.imageUrl });
+    toast.success(`${product.name} added to cart successfully`);
+  };
+
   return (
     <>
       <div className="topm">
@@ -56,7 +63,7 @@ function Description() {
           <h1 className="description-title">{product.name}</h1>
           <p className="description-price">${product.price.toFixed(2)}</p>
           <p className="description-text">{product.description}</p>
-          <button className="add-to-cart-button">Add to Cart</button>
+          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
         </div>
       </div>
       <ToastContainer />

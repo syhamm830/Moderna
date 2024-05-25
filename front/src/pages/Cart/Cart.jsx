@@ -1,47 +1,18 @@
-import React, { useState } from 'react';
-import './Cart.css';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faShoppingCart, faHome } from '@fortawesome/free-solid-svg-icons';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import CartContext from '../../components/cartcontext';
+import './Cart.css';
 
 const Cart = () => {
-    const [items, setItems] = useState([
-        { id: 1, name: "Fifa 19", price: 44.00, quantity: 2, image: "https://adopt.twic.pics/media/catalog/product/w/o/wonderfl_intense_50_ml_ecom_copie.jpg?twic=v1" },
-        { id: 2, name: "Glacier White 500GB", price: 249.99, quantity: 1, image: "https://adopt.twic.pics/media/catalog/product/w/o/wonderfl_intense_50_ml_ecom_copie.jpg?twic=v1" },
-        { id: 3, name: "Platinum Headset", price: 119.99, quantity: 1, image: "https://adopt.twic.pics/media/catalog/product/w/o/wonderfl_intense_50_ml_ecom_copie.jpg?twic=v1" },
-    ]);
+    const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
 
-    const handleQuantityChange = (id, delta) => {
-        setItems(prevItems => {
-            const updatedItems = prevItems.map(item =>
-                item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item
-            );
-            const item = updatedItems.find(item => item.id === id);
-            if (delta > 0) {
-                toast.success(`Increased quantity of ${item.name}`);
-            } else {
-                toast.info(`Decreased quantity of ${item.name}`);
-            }
-            return updatedItems;
-        });
-    };
-
-    const handleRemove = id => {
-        setItems(prevItems => {
-            const removedItem = prevItems.find(item => item.id === id);
-            toast.error(`Removed ${removedItem.name}`);
-            return prevItems.filter(item => item.id !== id);
-        });
-    };
-
-    const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
-    const totalCost = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    const totalCost = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
     return (
         <div className="App">
-            <ToastContainer />
             <section>
                 <div className="cart">
                     <div className="cart-details">
@@ -53,18 +24,18 @@ const Cart = () => {
                                 <span>Price</span>
                                 <span>Total</span>
                             </div>
-                            {items.map(item => (
+                            {cartItems.map(item => (
                                 <div className="cart-item" key={item.id}>
                                     <img src={item.image} alt={item.name} className="product-image" />
                                     <div className="item-details">
                                         <h4>{item.name}</h4>
                                         <p>PS4</p>
-                                        <button className="btn-remove" onClick={() => handleRemove(item.id)}>Remove</button>
+                                        <button className="btn-remove" onClick={() => removeFromCart(item.id)}>Remove</button>
                                     </div>
                                     <div className="quantity-controls">
-                                        <button onClick={() => handleQuantityChange(item.id, -1)}>-</button>
+                                        <button onClick={() => updateQuantity(item.id, -1)}>-</button>
                                         <span>{item.quantity}</span>
-                                        <button onClick={() => handleQuantityChange(item.id, 1)}>+</button>
+                                        <button onClick={() => updateQuantity(item.id, 1)}>+</button>
                                     </div>
                                     <div className="item-price">
                                         <p>${item.price.toFixed(2)}</p>
@@ -83,25 +54,17 @@ const Cart = () => {
                         <h2>Order Summary</h2>
                         <div className="summary-details">
                             <div className="summary-item">
-                                <span>Items</span>
+                                <span>Total Items:</span>
                                 <span>{totalItems}</span>
                             </div>
-                     
                             <div className="summary-item">
-                                <span>Promo Code</span>
-                                <input type="text" placeholder="Enter your code" />
-                                <button className="apply-button">Apply</button>
-                            </div>
-                            <div className="summary-total">
-                                <span>Total Cost</span>
-                                <span>{(totalCost).toFixed(2)} td</span>
+                                <span>Total Cost:</span>
+                                <span>${totalCost.toFixed(2)}</span>
                             </div>
                         </div>
                         <button className="checkout-button">
-                            <Link to="/checkout" style={{ color: "white", textDecoration: "none" }}>
-                                Checkout</Link>
+                            <Link to="/checkout" style={{ color: "white", textDecoration: "none" }}><FontAwesomeIcon icon={faShoppingCart} /> Proceed to Checkout</Link>
                         </button>
-
                     </div>
                 </div>
             </section>

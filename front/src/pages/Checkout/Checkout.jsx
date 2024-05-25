@@ -1,31 +1,64 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CartContext from '../../components/cartcontext'; 
 import './Checkout.css';
 
 const Checkout = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { cartItems, clearCart } = useContext(CartContext);  
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+  const totalCost = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const onSubmit = data => {
-    toast.success('Checkout successful!', {
-      position: toast.POSITION.TOP_RIGHT
-    });
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+  
+      const response = await fetch('http://localhost:8001/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: data.fullName,
+          phoneNumber: data.phoneNumber,
+          address: data.address,
+          cardNumber: data.cardNumber,
+          totalCost: totalCost,
+        }),
+      });
+  
+      if (response.ok) {
+        toast.success('Order placed successfully!', {
+          position: 'top-right' 
+        });
+        clearCart(); 
+  
+        // Reset the form after successful submission using the reset function
+        reset();
+      } else {
+        const errorMessage = await response.text();
+        console.error('Error placing order:', errorMessage);
+        toast.error('Failed to place order. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      toast.error('Failed to place order. Please try again later.');
+    }
   };
+  
+  
 
   const validateExpiryDate = value => {
     const [month, year] = value.split('/').map(num => parseInt(num, 10));
     if (!month || !year || month < 1 || month > 12) {
       return "Invalid expiry date";
     }
-
     const today = new Date();
     const currentMonth = today.getMonth() + 1;
     const currentYear = today.getFullYear();
     const expirationDate = new Date(year, month - 1);
 
-    // Ensure the card does not expire in the next two months
     const twoMonthsFromNow = new Date();
     twoMonthsFromNow.setMonth(today.getMonth() + 2);
 
@@ -35,6 +68,8 @@ const Checkout = () => {
 
     return true;
   };
+
+  
 
   return (
     <div className="checkout-container">
@@ -56,7 +91,7 @@ const Checkout = () => {
           </label>
           <label>
             Phone Number
-            <input className={errors.phone ? 'error-input' : ''} type="tel" {...register('phone', { required: 'Phone number is required' })} />
+            <input className={errors.phone ? 'error-input' : ''} type="tel" {...register('phoneNumber', { required: 'Phone number is required' })} />
             {errors.phone && <p className="error">{errors.phone.message}</p>}
           </label>
         </div>
@@ -106,8 +141,8 @@ const Checkout = () => {
 
         <div className="order-summary">
           <h3>Order Summary</h3>
-          <p>Items: 2</p>
-          <p>Total Cost: $374.98</p>
+          <p>Total Items: {totalItems}</p> 
+          <p>Total Cost: ${totalCost.toFixed(2)}</p> 
         </div>
 
         <button type="submit" className="btn-submit">Place Order</button>

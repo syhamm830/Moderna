@@ -7,7 +7,10 @@ const addOrder = async (req, res) => {
     return res.status(400).json({ message: error.details[0].message });
   }
   try {
-    const newOrder = await orderSchema.create(value);
+    const newOrder = await orderSchema.create({
+      ...value,
+      createdAt: new Date() // Ensure createdAt is set to the current date and time
+    });
     res.status(201).json(newOrder);
   } catch (e) {
     console.error(e);
@@ -17,7 +20,7 @@ const addOrder = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   try {
-    const orders = await orderSchema.find().populate('user');
+    const orders = await orderSchema.find().sort({ createdAt: -1 });
     res.status(200).json(orders);
   } catch (e) {
     res.status(500).json({ message: 'Error retrieving orders' });
@@ -27,7 +30,7 @@ const getAllOrders = async (req, res) => {
 const getOrderById = async (req, res) => {
   const orderId = req.params.id;
   try {
-    const order = await orderSchema.findById(orderId).populate('user');
+    const order = await orderSchema.findById(orderId);
     if (!order) return res.status(404).json({ message: 'Order not found' });
     res.json(order);
   } catch (e) {

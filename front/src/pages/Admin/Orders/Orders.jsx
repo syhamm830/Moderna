@@ -1,17 +1,37 @@
-// src/pages/Admin/Orders/Orders.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Orders.css';
 
 const Orders = () => {
-    const [orders, setOrders] = useState([
-        { id: 1, product: "Product 1", user: "User 1", status: "Pending" },
-        { id: 2, product: "Product 2", user: "User 2", status: "Delivered" },
-    ]);
+    const [orders, setOrders] = useState([]);
+
+    useEffect(() => {
+        fetchOrders();
+    }, []);
+
+    const fetchOrders = () => {
+        fetch('http://localhost:8001/orders')
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to fetch orders');
+                }
+            })
+            .then(data => {
+                // Sort orders by createdAt field
+                const sortedOrders = data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                setOrders(sortedOrders);
+            })
+            .catch(error => console.error('Error fetching orders:', error));
+    };
 
     const handleStatusChange = id => {
-        setOrders(orders.map(order => 
+        const updatedOrders = orders.map(order =>
             order.id === id ? { ...order, status: order.status === "Pending" ? "Delivered" : "Pending" } : order
-        ));
+        );
+        // Sort updated orders by createdAt field
+        const sortedOrders = updatedOrders.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        setOrders(sortedOrders);
     };
 
     return (
@@ -20,23 +40,31 @@ const Orders = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>User</th>
+                        <th>Num</th>
+                        <th>Fullname</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Card Number</th>
+                        <th>Total Cost</th>
                         <th>Status</th>
-                        <th>Actions</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {orders.map(order => (
+                    {orders.map((order, index) => (
                         <tr key={order.id}>
-                            <td>{order.product}</td>
-                            <td>{order.user}</td>
-                            <td>{order.status}</td>
-                            <td>
-                                <button onClick={() => handleStatusChange(order.id)}>
+                            <td>{index + 1}</td> 
+                            <td>{order.fullName}</td>
+                            <td>{order.phoneNumber}</td>
+                            <td>{order.address}</td>
+                            <td>{order.cardNumber}</td>
+                            <td>{order.totalCost}</td>
+                            <td className='stat'>{order.status}
+                            <button onClick={() => handleStatusChange(order.id)}>
                                     {order.status === "Pending" ? "Mark as Delivered" : "Mark as Pending"}
-                                </button>
+                            </button>
                             </td>
+                            <td>{new Date(order.createdAt).toLocaleString()}</td> {/* Display formatted date */}
                         </tr>
                     ))}
                 </tbody>
