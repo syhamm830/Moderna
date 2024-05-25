@@ -14,7 +14,7 @@ export default function SignUp() {
 
     const onSubmit = async data => {
         const { username, email, password, dob, phone } = data;
-
+    
         try {
             const response = await fetch('http://localhost:8001/users/register', {
                 method: 'POST',
@@ -29,29 +29,19 @@ export default function SignUp() {
                     phone,
                 }),
             });
-
+    
             const result = await response.json();
-
+    
             if (response.ok) {
                 toast.success('Registration successful!');
-                navigate('/contact');
+                // Delay navigation by 2 seconds
+                setTimeout(() => navigate('/contact'), 2000);
             } else {
                 toast.error(result.message || 'Registration failed!');
             }
         } catch (error) {
             toast.error('An error occurred during registration!');
         }
-    };
-
-    const validateAge = (value) => {
-        const today = new Date();
-        const birthDate = new Date(value);
-        const age = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age >= 13 || "You must be at least 13 years old";
     };
 
     return (
@@ -127,8 +117,7 @@ export default function SignUp() {
                                 <input
                                     type="date"
                                     {...register("dob", {
-                                        required: "Date of birth is required",
-                                        validate: validateAge
+                                        required: "Date of birth is required"
                                     })}
                                     className={errors.dob ? 'error-input' : ''}
                                 />
@@ -141,7 +130,7 @@ export default function SignUp() {
                                     {...register("phone", {
                                         required: "Phone number is required",
                                         pattern: {
-                                            value: /^[0-9]{10,15}$/,
+                                            value: /^[0-9]{8,15}$/,
                                             message: "Invalid phone number"
                                         }
                                     })}
