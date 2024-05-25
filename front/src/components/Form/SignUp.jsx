@@ -1,15 +1,47 @@
 import React from 'react';
 import './Form.css';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock, faHome, faCalendar, faPhone } from '@fortawesome/free-solid-svg-icons';
-import bg from '../../assets/SignBack.png'; 
+import bg from '../../assets/SignBack.png';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUp() {
-    const { register, handleSubmit,formState: { errors }, watch } = useForm();
-    
-    const onSubmit = data => console.log(data);
+    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const navigate = useNavigate();
+
+    const onSubmit = async data => {
+        const { username, email, password, dob, phone } = data;
+
+        try {
+            const response = await fetch('http://localhost:8001/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: username,
+                    email,
+                    password,
+                    birthdate: dob,
+                    phone,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                toast.success('Registration successful!');
+                navigate('/contact');
+            } else {
+                toast.error(result.message || 'Registration failed!');
+            }
+        } catch (error) {
+            toast.error('An error occurred during registration!');
+        }
+    };
 
     const validateAge = (value) => {
         const today = new Date();
@@ -24,6 +56,7 @@ export default function SignUp() {
 
     return (
         <div className="App">
+            <ToastContainer />
             <section>
                 <div className="register">
                     <div className="col2">
@@ -47,7 +80,7 @@ export default function SignUp() {
                                 <FontAwesomeIcon icon={faEnvelope} className="icon" />
                                 <input
                                     type="email"
-                                    {...register("email", { 
+                                    {...register("email", {
                                         required: "Email is required",
                                         pattern: {
                                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -63,7 +96,7 @@ export default function SignUp() {
                                 <FontAwesomeIcon icon={faLock} className="icon" />
                                 <input
                                     type="password"
-                                    {...register("password", { 
+                                    {...register("password", {
                                         required: "Password is required",
                                         minLength: {
                                             value: 6,
@@ -79,7 +112,7 @@ export default function SignUp() {
                                 <FontAwesomeIcon icon={faLock} className="icon" />
                                 <input
                                     type="password"
-                                    {...register("confirmPassword", { 
+                                    {...register("confirmPassword", {
                                         required: "Please confirm your password",
                                         validate: (value) =>
                                             value === watch("password") || "Passwords do not match"
@@ -93,7 +126,7 @@ export default function SignUp() {
                                 <FontAwesomeIcon icon={faCalendar} className="icon" />
                                 <input
                                     type="date"
-                                    {...register("dob", { 
+                                    {...register("dob", {
                                         required: "Date of birth is required",
                                         validate: validateAge
                                     })}
@@ -105,7 +138,7 @@ export default function SignUp() {
                                 <FontAwesomeIcon icon={faPhone} className="icon" />
                                 <input
                                     type="tel"
-                                    {...register("phone", { 
+                                    {...register("phone", {
                                         required: "Phone number is required",
                                         pattern: {
                                             value: /^[0-9]{10,15}$/,
@@ -129,7 +162,7 @@ export default function SignUp() {
                             <button className="btn">Sign Up</button>
                         </form>
                         <div className="links">
-                            <p>Already have an account? <Link to="/contact">Sign In</Link></p>
+                            <p>Already have an account? <Link to="/login">Sign In</Link></p>
                             <Link to="/">
                                 <FontAwesomeIcon icon={faHome} className="icon" /> Back to Home
                             </Link>

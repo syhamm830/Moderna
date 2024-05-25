@@ -1,17 +1,49 @@
 import React from 'react';
 import './Form.css';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock, faHome } from '@fortawesome/free-solid-svg-icons';
 import bg from '../../assets/SignBack.png'; 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function Form() {
+export default function SignIn() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const navigate = useNavigate();
+
+    const onSubmit = async data => {
+        try {
+            const response = await fetch('http://localhost:8001/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                toast.success('Login successful!');
+                localStorage.setItem('token', result.token);
+                
+                if (result.role === 'admin') {
+                    navigate('/admin/dashboard');
+                } else {
+                    navigate('/');
+                }
+            } else {
+                toast.error(result.message || 'Login failed!');
+            }
+        } catch (error) {
+            toast.error('An error occurred during login!');
+        }
+    };
 
     return (
         <div className="App">
+            <ToastContainer />
             <section>
                 <div className="register">
                     <div className="col1">
@@ -21,22 +53,22 @@ export default function Form() {
                             <div className="input-container">
                                 <FontAwesomeIcon icon={faUser} className="icon" />
                                 <input
-                                    type="text"
-                                    {...register("usernameOrEmail", { required: true })}
-                                    placeholder="Username or Email"
-                                    className={errors.usernameOrEmail ? 'error-input' : ''}
+                                    type="email"
+                                    {...register("email", { required: "Email is required" })}
+                                    placeholder="Email"
+                                    className={errors.email ? 'error-input' : ''}
                                 />
-                                {errors.usernameOrEmail && <a className="error">Username or Email is required</a>}
+                                {errors.email && <p className="error">{errors.email.message}</p>}
                             </div>
                             <div className="input-container">
                                 <FontAwesomeIcon icon={faLock} className="icon" />
                                 <input
                                     type="password"
-                                    {...register("password", { required: true })}
+                                    {...register("password", { required: "Password is required" })}
                                     placeholder="Password"
                                     className={errors.password ? 'error-input' : ''}
                                 />
-                                {errors.password && <a className="error">Password is required</a>}
+                                {errors.password && <p className="error">{errors.password.message}</p>}
                             </div>
                             <button className="btn">Sign In</button>
                         </form>

@@ -17,7 +17,7 @@ const Navbar = () => {
             <input type="text" name="query" class="search-input" placeholder="Search for items..." />
        </div>
        <div className="contactn">
-          <Link to="/Contact"><i className="fas fa-user" style={{ color: 'white' }}></i></Link>
+          <Link to="/Contact"><i className="fas fa-user" style={{ color: 'white' }}></i>  </Link>
        </div>
        <div className="cartn">
           <Link to="/Cart"><i className="fas fa-shopping-bag" style={{ color: 'white' }}></i></Link>
