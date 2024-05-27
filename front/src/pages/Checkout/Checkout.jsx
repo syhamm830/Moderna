@@ -34,7 +34,7 @@ const Checkout = () => {
         });
         clearCart(); 
   
-        // Reset the form after successful submission using the reset function
+
         reset();
       } else {
         const errorMessage = await response.text();
