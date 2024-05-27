@@ -1,70 +1,46 @@
-.topm {
-    background-color: black;
-    padding: 0.5vw;
-    overflow: hidden;
-    white-space: nowrap; 
-    box-sizing: border-box; 
-    text-align: center; 
-}
-
-.topm p {
-    color: white;
-    display: inline-block; 
-    animation: swing 5s ease-in-out infinite; 
-    margin: 0; 
-}
-
-@keyframes swing {
-    0%, 100% {
-        transform: translateX(0); 
-    }
-    25% {
-        transform: translateX(-10%); 
-    }
-    75% {
-        transform: translateX(10%); 
-    }
-}
-
-.product-list {
+.shopping-page {
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 3vw; 
-    padding: 2vw; 
-    margin-top: 4vw;
-    text-decoration: none;
-}
-
-.title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 2vw 0;
-}
+  }
   
-.title {
-    margin: 0 1vw;
-    font-size: 2vw;
-    font-weight: bold;
-    color: #333;
-}
-  
-.line {
+  .shopping-content {
     flex-grow: 1;
-    height: 2px;
-    background-color: #333;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: none;
-}
+    padding: 20px;
+  }
   
-.product-title,
-.product-price {
-    text-decoration: none;
-}
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product-list p {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .sidebar {
+    width: 200px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ccc;
+  }
+  
+  .sidebar h3 {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .sidebar ul li:hover {
+    text-decoration: underline;
+  }
+  

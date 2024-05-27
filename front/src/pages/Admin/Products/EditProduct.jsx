@@ -34,7 +34,6 @@ const EditProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Create a copy of the product object without the _id, createdAt, and __v fields
         const { _id, createdAt, __v, ...productData } = product;
         try {
             const response = await fetch(`http://localhost:8001/products/${id}`, {

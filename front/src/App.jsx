@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from './components/Navbar/Navbar';
+import SearchResults from './components/Search/Search'
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/description/:productId" element={<Description />} />
                     <Route path="/shop" element={<Shopping />} />
+                    <Route path="/results/search" element={<SearchResults />} />    
                     <Route path="/women" element={<Shopping category="Women" />} />
                     <Route path="/men" element={<Shopping category="Men" />} />
                     <Route path="/signup" element={<SignUp />} />

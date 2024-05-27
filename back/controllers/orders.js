@@ -9,7 +9,7 @@ const addOrder = async (req, res) => {
   try {
     const newOrder = await orderSchema.create({
       ...value,
-      createdAt: new Date() // Ensure createdAt is set to the current date and time
+      createdAt: new Date() 
     });
     res.status(201).json(newOrder);
   } catch (e) {
