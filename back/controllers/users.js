@@ -50,22 +50,26 @@ const getUserById = async (req, res) => {
 
 const updateUserById = async (req, res) => {
   const userId = req.params.id;
+  
   const { error, value } = userValidation.validate(req.body, { abortEarly: false });
-  if (error) { 
-      return res.status(400).json({ message: error.details.map(x => x.message).join(', ') });
+  if (error) {
+    return res.status(400).json({ message: error.details.map(x => x.message).join(', ') });
   }
+  
   try {
-      if (value.password) {
-          value.password = await bcrypt.hash(value.password, 10);
-      } else {
-          delete value.password;
-      }
+    if (value.password) {
+      value.password = await bcrypt.hash(value.password, 10);
+    } else {
+      delete value.password;
+    }
+    const user = await userSchema.findByIdAndUpdate(userId, value, { new: true, runValidators: true });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
-      const user = await User.findByIdAndUpdate(userId, value, { new: true });
-      if (!user) return res.status(404).json({ message: 'User not found' });
-      res.json(user);
-  } catch (e) {
-      res.status(500).json({ message: 'Error updating user', error: e.message });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating user', error: error.message });
   }
 };
 
