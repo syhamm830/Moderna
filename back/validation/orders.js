@@ -41,8 +41,8 @@ const orderValidation = Joi.object({
     }),
 
   status: Joi.string()
-    .valid('pending', 'delivered')
-    .default('pending')
+    .valid('Pending', 'Delivered')
+    .default('Pending')
     .messages({
       'string.base': 'Status should be a type of text',
       'any.only': 'Status should be either pending or delivered'

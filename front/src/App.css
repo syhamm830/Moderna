@@ -15,3 +15,6 @@ body{
     color: rgb(68,68,68);
     min-height: 80vh;
 }
+footer {
+    position:relative
+}

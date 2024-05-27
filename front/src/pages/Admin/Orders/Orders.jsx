@@ -18,7 +18,6 @@ const Orders = () => {
                 }
             })
             .then(data => {
-                // Sort orders by createdAt field
                 const sortedOrders = data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
                 setOrders(sortedOrders);
             })
@@ -29,7 +28,6 @@ const Orders = () => {
         const updatedOrders = orders.map(order =>
             order.id === id ? { ...order, status: order.status === "Pending" ? "Delivered" : "Pending" } : order
         );
-        // Sort updated orders by createdAt field
         const sortedOrders = updatedOrders.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
         setOrders(sortedOrders);
     };
@@ -64,7 +62,7 @@ const Orders = () => {
                                     {order.status === "Pending" ? "Mark as Delivered" : "Mark as Pending"}
                             </button>
                             </td>
-                            <td>{new Date(order.createdAt).toLocaleString()}</td> {/* Display formatted date */}
+                            <td>{new Date(order.createdAt).toLocaleString()}</td> 
                         </tr>
                     ))}
                 </tbody>

@@ -1,6 +1,7 @@
 const userSchema = require('../models/users');
 const userValidation = require('../validation/users');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+
 const jwt = require('jsonwebtoken');
 
 const addUser = async (req, res) => {
@@ -50,7 +51,7 @@ const getUserById = async (req, res) => {
 const updateUserById = async (req, res) => {
   const userId = req.params.id;
   const { error, value } = userValidation.validate(req.body, { abortEarly: false });
-  if (error) {
+  if (error) { 
       return res.status(400).json({ message: error.details.map(x => x.message).join(', ') });
   }
   try {
@@ -78,6 +79,7 @@ const deleteUserById = async (req, res) => {
     res.status(404).json({ message: 'No user with id ' + userId });
   }
 };
+
 
 module.exports = {
   addUser,
