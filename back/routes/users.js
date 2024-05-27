@@ -106,6 +106,30 @@ router.post('/login', async (req, res) => {
 });
 
 
+// const { asyncHandler } = require('../middlewares/asyncHandler');
+// const { ApiError } = require('../utils/ApiError');
+// const { ApiResponse } = require('../utils/ApiResponse');
+// const User = require('../models/user.model'); // Adjust the path as necessary
+
+// const logoutUser = asyncHandler(async (req, res) => {
+//   const userId = req.user._id;
+
+//   await User.findByIdAndUpdate(
+//     userId,
+//     { $unset: { refreshToken: 1 } },
+//     { new: true }
+//   );
+
+//   res
+//     .status(200)
+//     .clearCookie('accessToken', { httpOnly: true, secure: true })
+//     .clearCookie('refreshToken', { httpOnly: true, secure: true })
+//     .json(new ApiResponse(200, {}, 'User logged out successfully'));
+// });
+
+// module.exports = {
+//   logoutUser
+// };
 
 
 
