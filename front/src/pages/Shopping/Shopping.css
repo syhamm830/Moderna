@@ -4,7 +4,6 @@
   
   .shopping-content {
     flex-grow: 1;
-    padding: 20px;
   }
   
   .product-list {
@@ -23,6 +22,8 @@
     padding: 20px;
     background-color: #f4f4f4;
     border-right: 1px solid #ccc;
+    height: 100vh;
+    position: fixed; 
   }
   
   .sidebar h3 {
@@ -43,4 +44,6 @@
   .sidebar ul li:hover {
     text-decoration: underline;
   }
+  
+
   

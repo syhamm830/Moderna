@@ -1,13 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ category, onFilter }) => {
-  const navigate = useNavigate();
-
   const handleFilter = (subcategory) => {
     onFilter(subcategory);
-    navigate(`/products/${category}?subcategory=${subcategory}`);
   };
 
   return (
