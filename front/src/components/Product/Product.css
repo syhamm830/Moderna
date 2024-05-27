@@ -56,6 +56,6 @@
         transform: scale(1);
     }
     50% {
-        transform: scale(1.05); /* Slightly increase size */
+        transform: scale(1.05); 
     }
   }

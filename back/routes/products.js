@@ -17,7 +17,7 @@ router.get('/:id', getproductById);
 router.post('/', createProduct);
 router.put('/:id', updateproductById);
 router.delete('/:id', deleteproductById);
-// router.get('/category/:category',getproductByCategory);
+
 router.get('/subcategory/:subcategory',getproductBySubCategory);
 router.get('/category/:category', async (req, res) => {
   try {

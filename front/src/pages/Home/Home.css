@@ -68,7 +68,7 @@
 .button-container button:hover {
     background-color: white; 
     color: #2d2d2d;
-    animation: bounce 0.5s; /* Add bounce effect on hover */
+    animation: bounce 0.5s; 
 }
 
 @keyframes pulse {
@@ -76,7 +76,7 @@
         transform: scale(1);
     }
     50% {
-        transform: scale(1.05); /* Slightly increase size */
+        transform: scale(1.05); 
     }
 }
 
@@ -85,6 +85,6 @@
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px); /* Move up slightly */
+        transform: translateY(-10px); 
     }
 }
